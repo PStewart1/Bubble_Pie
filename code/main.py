@@ -5,7 +5,7 @@ from level import Level
 
 class Game:
     def __init__(self):
-        
+        # general setup
         pygame.init()
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.set_caption('The Legend of Bubbles')
