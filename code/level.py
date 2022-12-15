@@ -11,9 +11,11 @@ class Level:
     def __init__(self):
         # get the display surface
         self.display_surface = pygame.display.get_surface()
+
         # sprite group setup
         self.visible_sprites = YSortCameraGroup()
         self.obstacle_sprites = pygame.sprite.Group()
+
         # sprite setup
         self.create_map()
 
@@ -21,7 +23,7 @@ class Level:
         layouts = {
             'boundary': import_csv_layout('../map/map_FloorBlocks.csv'),
             'grass': import_csv_layout('../map/map_Grass.csv'),
-            'object': import_csv_layout('../map/map_Objects.csv')
+            'object': import_csv_layout('../map/map_Objects.csv'),
         }
         graphics = {
             'grass': import_folder('../graphics/grass'),
@@ -50,6 +52,7 @@ class Level:
         # update and draw the game
         self.visible_sprites.custom_draw(self.player)
         self.visible_sprites.update()
+        debug(self.player.status)
 
 
 class YSortCameraGroup(pygame.sprite.Group):
@@ -74,6 +77,7 @@ class YSortCameraGroup(pygame.sprite.Group):
         # drawing the floor
         offset_floor = self.floor_rect.topleft - self.offset
         self.display_surface.blit(self.floor_surf, offset_floor)
+
 
         for sprite in sorted(self.sprites(), key = lambda sprite: sprite.rect.centery):
             offset_pos = sprite.rect.topleft - self.offset
