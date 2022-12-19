@@ -99,6 +99,13 @@ class Enemy(Entity):
             if self.status == 'attack':
                 self.can_attack = False
             self.frame_index = 0
+        
+
+        # adding new image for bubbles
+        if self.monster_name == 'bamboo':
+            # pygame.draw.circle(self.image, WATER_COLOR, self.hitbox.center, 30)  
+            self.image = pygame.transform.scale(self.image, (64,64))
+            
 
         self.image = animation[int(self.frame_index)]
         self.rect = self.image.get_rect(center = self.hitbox.center)
@@ -109,6 +116,7 @@ class Enemy(Entity):
             self.image.set_alpha(alpha)
         else:
             self.image.set_alpha(255)
+
 
     def cooldowns(self):
         current_time = pygame.time.get_ticks()
