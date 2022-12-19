@@ -103,15 +103,13 @@ class Enemy(Entity):
             if self.status == 'attack':
                 self.can_attack = False
             self.frame_index = 0
-        
+        self.image = animation[int(self.frame_index)]
 
         # adding new image for bubbles
         if self.monster_name == 'bamboo':
             # pygame.draw.circle(self.image, WATER_COLOR, self.hitbox.center, 30)  
             self.image = pygame.transform.scale(self.image, (64,64))
             
-
-        self.image = animation[int(self.frame_index)]
         self.rect = self.image.get_rect(center=self.hitbox.center)
 
         # flicker
