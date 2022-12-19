@@ -1,6 +1,7 @@
 # Bubble_Pie
-Our first Pygame, for our first 1-week Hack-sprint
-an RPG adventure, in the vein of Zelda
+Our first Pygame, for our first 1-week Hack-sprint.
+An RPG adventure, in the vein of Zelda.
+Tutorial can be found here: [Zelda Pygame Tutorial](https://youtu.be/QU1pPzEGrqw)
 
 ## To Run Game
 * Clone this repository: `git clone "https://github.com//PStewart1/Bubble_Pie"`

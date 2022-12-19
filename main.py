@@ -21,7 +21,7 @@ class Game:
         main_sound.set_volume(0.4)
         main_sound.play(loops = -1)
 
-    async def main(self):
+    async def main(self): #
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -40,4 +40,4 @@ class Game:
 
 # if __name__ == '__main__':
 game = Game() 
-asyncio.run( game.main() )
+asyncio.run( game.main() ) #
