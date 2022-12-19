@@ -4,7 +4,7 @@ an RPG adventure, in the vein of Zelda
 
 ## To Run Game
 * Clone this repository: `git clone "https://github.com//PStewart1/Bubble_Pie"`
-* Access Bubble directory: `cd Bubble_Pie/code`
+<!-- * Access Bubble directory: `cd Bubble_Pie` -->
 * Run the game: `python3 main.py`
 
 ## How to Play
