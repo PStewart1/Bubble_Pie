@@ -129,9 +129,11 @@ class Level:
     def damage_player(self, amount, attack_type):
         if not self.player.vulnerable:
             return
-        self.player.health -= amount
-        self.player.vulnerable = False
-        self.player.hurt_time = pygame.time.get_ticks()
+        self.player.__dict__.update({
+            'health': self.player.health - amount,
+            'vulnerable': False,
+            'hurt_time': pygame.time.get_ticks()
+        })
         self.animation_player.create_particles(attack_type,
                                                self.player.rect.center,
                                                [self.visible_sprites])
