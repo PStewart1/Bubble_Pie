@@ -3,11 +3,15 @@ from settings import *
 from support import *
 from entity import Entity
 
+
 class Player(Entity):
-    def __init__(self, pos, groups, obstacle_sprites, create_attack, destroy_attack, create_magic):
+
+    def __init__(self, pos, groups, obstacle_sprites, create_attack,
+                 destroy_attack, create_magic):
         super().__init__(groups)
-        self.image = pygame.image.load('graphics/test/player.png').convert_alpha()
-        self.rect = self.image.get_rect(topleft = pos)
+        self.image = pygame.image.load(
+            'graphics/test/player.png').convert_alpha()
+        self.rect = self.image.get_rect(topleft=pos)
         self.hitbox = self.rect.inflate(-6, HITBOX_OFFSET['player'])
 
         # graphics setup
@@ -38,9 +42,27 @@ class Player(Entity):
         self.magic_switch_time = None
 
         # stats
-        self.stats = {'health': 100,'energy':60,'attack': 10,'magic': 4,'speed': 5}
-        self.max_stats = {'health': 300, 'energy': 140, 'attack': 20, 'magic' : 10, 'speed': 10}
-        self.upgrade_cost = {'health': 100, 'energy': 100, 'attack': 100, 'magic' : 100, 'speed': 100}
+        self.stats = {
+            'health': 100,
+            'energy': 60,
+            'attack': 10,
+            'magic': 4,
+            'speed': 5
+        }
+        self.max_stats = {
+            'health': 300,
+            'energy': 140,
+            'attack': 20,
+            'magic': 10,
+            'speed': 10
+        }
+        self.upgrade_cost = {
+            'health': 100,
+            'energy': 100,
+            'attack': 100,
+            'magic': 100,
+            'speed': 100
+        }
         self.health = self.stats['health']
         self.energy = self.stats['energy']
         self.exp = 0
@@ -52,14 +74,25 @@ class Player(Entity):
         self.invulnerability_duration = 500
 
         # import sound
-        self.weapon_attack_sound = pygame.mixer.Sound('audio/sword.wav')
+        self.weapon_attack_sound = pygame.mixer.Sound('audio/sword.ogg')
         self.weapon_attack_sound.set_volume(0.4)
 
     def import_player_assets(self):
         character_path = 'graphics/player/'
-        self.animations = {'up': [],'down': [],'left': [],'right': [],
-			'right_idle':[],'left_idle':[],'up_idle':[],'down_idle':[],
-			'right_attack':[],'left_attack':[],'up_attack':[],'down_attack':[]}
+        self.animations = {
+            'up': [],
+            'down': [],
+            'left': [],
+            'right': [],
+            'right_idle': [],
+            'left_idle': [],
+            'up_idle': [],
+            'down_idle': [],
+            'right_attack': [],
+            'left_attack': [],
+            'up_attack': [],
+            'down_attack': []
+        }
 
         for animation in self.animations.keys():
             full_path = character_path + animation
@@ -102,7 +135,8 @@ class Player(Entity):
                 self.attacking = True
                 self.attack_time = pygame.time.get_ticks()
                 style = list(magic_data.keys())[self.magic_index]
-                strength = list(magic_data.values())[self.magic_index]['strength'] + self.stats['magic']
+                strength = list(magic_data.values())[
+                    self.magic_index]['strength'] + self.stats['magic']
                 cost = list(magic_data.values())[self.magic_index]['cost']
                 self.create_magic(style, strength, cost)
 
@@ -144,9 +178,10 @@ class Player(Entity):
 
     def cooldowns(self):
         current_time = pygame.time.get_ticks()
-        
+
         if self.attacking:
-            if current_time - self.attack_time >= self.attack_cooldown + weapon_data[self.weapon]['cooldown']:
+            if current_time - self.attack_time >= self.attack_cooldown + weapon_data[
+                    self.weapon]['cooldown']:
                 self.attacking = False
                 self.destroy_attack()
 
@@ -172,7 +207,7 @@ class Player(Entity):
 
         # set the image
         self.image = animation[int(self.frame_index)]
-        self.rect = self.image.get_rect(center = self.hitbox.center)
+        self.rect = self.image.get_rect(center=self.hitbox.center)
 
         # flicker
         if not self.vulnerable:
@@ -210,4 +245,3 @@ class Player(Entity):
         self.animate()
         self.move(self.stats['speed'])
         self.energy_recovery()
-        
