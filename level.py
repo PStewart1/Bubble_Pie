@@ -1,10 +1,10 @@
+from random import choice, randint
 import pygame
 from settings import *
 from tile import Tile
 from player import Player
 # from debug import debug
 from support import *
-from random import choice, randint
 from weapon import Weapon
 from ui import UI
 from enemy import Enemy
@@ -80,10 +80,14 @@ class Level:
                                     self.obstacle_sprites, self.create_attack,
                                     self.destroy_attack, self.create_magic)
                             else:
-                                if column == '390': monster_name = 'bamboo'
-                                elif column == '391': monster_name = 'spirit'
-                                elif column == '392': monster_name = 'raccoon'
-                                else: monster_name = 'squid'
+                                if column == '390':
+                                    monster_name = 'bamboo'
+                                elif column == '391':
+                                    monster_name = 'spirit'
+                                elif column == '392':
+                                    monster_name = 'raccoon'
+                                else:
+                                    monster_name = 'squid'
                                 Enemy(monster_name, (x, y), [
                                     self.visible_sprites,
                                     self.attackable_sprites
@@ -106,7 +110,7 @@ class Level:
     def destroy_attack(self):
         if self.current_attack:
             self.current_attack.kill()
-        self.current_attack = None
+            self.current_attack = None
 
     def player_attack_logic(self):
         if self.attack_sprites:
@@ -127,6 +131,14 @@ class Level:
                                                      attack_sprite.sprite_type)
 
     def damage_player(self, amount, attack_type):
+        """
+        Checks if the player is vulnerable.
+        Damages, sets iframes, and plays animation if so
+        This method of setting player values could break if
+        We attempt to update an attribute that doesn't already exist.
+        Also, it overrides any existing setter methods
+        For this class, there are none.
+        """
         if not self.player.vulnerable:
             return
         self.player.__dict__.update({
