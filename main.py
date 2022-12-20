@@ -7,6 +7,7 @@ from level import Level
 
 
 class Game:
+
     def __init__(self):
         # general setup
         pygame.init()
@@ -19,9 +20,9 @@ class Game:
         # sound
         main_sound = pygame.mixer.Sound('audio/main.ogg')
         main_sound.set_volume(0.4)
-        main_sound.play(loops = -1)
+        main_sound.play(loops=-1)
 
-    async def main(self): #
+    async def main(self):  #
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -36,8 +37,9 @@ class Game:
             pygame.display.update()
             self.clock.tick(FPS)
 
-            await asyncio.sleep(0) # added for pygbag
+            await asyncio.sleep(0)  # added for pygbag
+
 
 # if __name__ == '__main__':
-game = Game() 
-asyncio.run( game.main() ) #
+game = Game()
+asyncio.run(game.main())

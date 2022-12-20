@@ -1,12 +1,16 @@
 import pygame
+import os
 from settings import *
 from entity import Entity
 from support import *
 
+
 class Enemy(Entity):
-    def __init__(self, monster_name, pos, groups, obstacle_sprites, damage_player, trigger_death_particles, add_xp):
+
+    def __init__(self, monster_name, pos, groups, obstacle_sprites,
+                 damage_player, trigger_death_particles, add_xp):
         super().__init__(groups)
-        
+
         # general setup
         self.sprite_type = 'enemy'
 
@@ -16,7 +20,7 @@ class Enemy(Entity):
         self.image = self.animations[self.status][self.frame_index]
 
         # movement
-        self.rect = self.image.get_rect(topleft = pos)
+        self.rect = self.image.get_rect(topleft=pos)
         self.hitbox = self.rect.inflate(0, -10)
         self.obstacle_sprites = obstacle_sprites
 
@@ -54,10 +58,10 @@ class Enemy(Entity):
         self.attack_sound.set_volume(0.3)
 
     def import_graphics(self, name):
-        self.animations = {'idle': [], 'move': [], 'attack': []}
-        main_path = f'graphics/monsters/{name}/'
-        for animation in self.animations.keys():
-            self.animations[animation] = import_folder(main_path + animation)
+        self.animations = {}
+        for animation_type in os.listdir(f'graphics/monsters/{name}'):
+            self.animations[animation_type] = import_folder(
+                f'graphics/monsters/{name}/{animation_type}')
 
     def get_player_distance_direction(self, player):
         enemy_vec = pygame.math.Vector2(self.rect.center)
@@ -101,7 +105,7 @@ class Enemy(Entity):
             self.frame_index = 0
 
         self.image = animation[int(self.frame_index)]
-        self.rect = self.image.get_rect(center = self.hitbox.center)
+        self.rect = self.image.get_rect(center=self.hitbox.center)
 
         # flicker
         if not self.vulnerable:
