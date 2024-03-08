@@ -7,8 +7,7 @@ Tutorial can be found here: [Zelda Pygame Tutorial](https://youtu.be/QU1pPzEGrqw
 * Clone this repository: `git clone "https://github.com//PStewart1/Bubble_Pie"`
 * Install [Pygame](https://www.pygame.org/wiki/GettingStarted)
 * Run the game: `python3 main.py`
-* You can also play it in the browser [here](http://paul-stewart.tech/). 
-  (Though it will perform better when run locally.)
+
 
 ## How to Play
 Keyboard controls:
